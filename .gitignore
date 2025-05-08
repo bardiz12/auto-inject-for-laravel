@@ -15,3 +15,5 @@ lupdate.txt
 --cache-directory
 /tmp
 /.tmp
+coverage.xml
+junit.xml

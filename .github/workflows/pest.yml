@@ -24,7 +24,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest --dev
 
       - name: Run Pest Tests with Minimum Coverage
-        run: ./vendor/bin/pest --coverage --min=80 --log-junit junit.xml
+        run: ./vendor/bin/pest --coverage --coverage-clover coverage.xml --min=80 --log-junit junit.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
