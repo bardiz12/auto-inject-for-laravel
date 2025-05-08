@@ -1,0 +1,38 @@
+name: Run Pest Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: mbstring, bcmath, intl
+          coverage: pcov
+
+      - name: Install Composer dependencies (including require-dev)
+        run: composer install --prefer-dist --no-progress --no-suggest --dev
+
+      - name: Run Pest Tests with Minimum Coverage
+        run: ./vendor/bin/pest --coverage --coverage-clover coverage.xml --min=80 --log-junit junit.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
