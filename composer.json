@@ -1,6 +1,7 @@
 {
     "name": "bardiz12/auto-inject-for-laravel",
     "description": "Automatic dependency injection for laravel",
+    "keywords": ["laravel", "dependency-injection", "dependency", "container"],
     "type": "library",
     "require-dev": {
         "pestphp/pest": "^3.8",
