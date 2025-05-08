@@ -4,7 +4,7 @@
 Inspired by php-di's `#[Inject()]` attribute, i created a simple package to automatically inject dependency to php class's properties. This package is also support lazy load the dependency by proxying the access to class via Laravel's app() helper.
 
 ## Installation
-`composer install bardiz12/auto-inject-for-laravel`
+`composer require bardiz12/auto-inject-for-laravel`
 
 ## Usage
 
