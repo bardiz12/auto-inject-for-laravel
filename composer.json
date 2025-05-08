@@ -1,0 +1,30 @@
+{
+    "name": "bardiz12/auto-inject-for-laravel",
+    "description": "Automatic dependency injection for laravel",
+    "type": "library",
+    "require-dev": {
+        "pestphp/pest": "^3.8",
+        "laravel/framework": "^11.0.0|^12.13",
+        "pestphp/pest-plugin-laravel": "^3.2",
+        "orchestra/testbench": "^10.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bardiz12\\AutoInjectForLaravel\\": "src/",
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bardizba",
+            "email": "moch.bardizba@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
