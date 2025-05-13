@@ -64,7 +64,7 @@ Inspired by php-di's `#[Inject()]` attribute, i created a simple package to auto
         {
             use AutoInjectable;
 
-            #[Inject(abstract: 'MyDependency')]
+            #[Inject(abstract: MyDependency::class)]
             /**
             * My Dependency
             *
@@ -79,33 +79,35 @@ Inspired by php-di's `#[Inject()]` attribute, i created a simple package to auto
             }
         }
         ```
-3. To Use Lazy load, you need to add type Lazy and add lazy parameter to the Inject attribute.
+3. To Use Lazy load, you can add lazy parameter to the Inject attribute. If the lazy parameter is not provided but the property has **Lazy** type using Union Type, it will be loaded as lazy Dependency.
     ```php
-            <?php
+    <?php
 
-            namespace ...;
+    namespace ...;
 
-            use Bardiz12\AutoInjectForLaravel\Attributes\Inject;
-            use Bardiz12\AutoInjectForLaravel\AutoInjectable;
+    use Bardiz12\AutoInjectForLaravel\Attributes\Inject;
+    use Bardiz12\AutoInjectForLaravel\AutoInjectable;
+    use Bardiz12\AutoInjectForLaravel\Proxy\Lazy;
 
-            class MyClass
-            {
-                use AutoInjectable;
+    class MyClass
+    {
+        use AutoInjectable;
 
-                #[Inject(lazy: true)]
-                /**
-                 * 
-                 *
-                 * @var MyDependency|Lazy<MyDependency>
-                 */
-                protected MyDependency|Lazy $myDependency;
+        #[Inject(lazy: true)]
+        /**
+         * 
+         *
+         * @var MyDependency|Lazy<MyDependency>
+         */
+        protected MyDependency|Lazy $myDependency;
 
-                ...
-                public function __construct()
-                {
-                    $this->autoInject();
-                }
-            }
-            ```
+        ...
+        public function __construct()
+        {
+            $this->autoInject();
+        }
+    }
+    ```
+    or 
 
 
