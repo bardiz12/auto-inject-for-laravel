@@ -21,11 +21,14 @@ trait AutoInjectable
                 $args = $attributes[0]->getArguments();
                 $abstract = $args['abstract'] ?? null;
 
+                $lazy = $args['lazy'] ?? false;
+
                 if ($abstract === null) {
                     $type = $property->getType();
                     if ($type instanceof ReflectionUnionType) {
                         foreach ($type->getTypes() as $type) {
                             if ($type->getName() === Lazy::class) {
+                                $lazy = true;
                                 continue;
                             } else {
                                 $abstract = $type->getName();
@@ -36,8 +39,6 @@ trait AutoInjectable
                         $abstract = $type->getName();
                     };
                 }
-
-                $lazy = $args['lazy'] ?? false;
 
                 if ($abstract === null) {
                     throw new UndefinedAbstractException($this::class . "::\$" . $property->getName() . " must have defined type or must have defined abstract. use : #[Inject(abstract: YOUR_ABSTRACT)]");
